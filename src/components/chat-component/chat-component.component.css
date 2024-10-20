@@ -289,7 +289,6 @@ html, body {
     max-height: calc(50% - 10px); /* Set a fixed max-height */
     width: 100%; /* Take full width of the container */
     overflow: hidden; /* Hide any overflow to prevent scrollbars */
-    /* Removed overflow: auto; */
 }
 
 .row-title {
@@ -319,11 +318,9 @@ html, body {
 
 .graph-card-test {
     width: 100%;
-    /*background-color: white;*/
     padding: 10%;
     margin-bottom: 10px;
     border-radius: 10px;
-    /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);*/
     color: white;
     box-sizing: border-box;
     display: flex;
@@ -332,26 +329,13 @@ html, body {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    background-color: #212121; /* Default green background */
-    box-shadow: 0 8px #151515; /* 3D button effect */
-    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    background-color: #1c1c1c;
+    box-shadow: 0 8px #151515;
+    font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
 
 }
 
-/*.graph-info-card {*/
-/*    width: 100%;*/
-/*    background-color: white;*/
-/*    padding: 10%;*/
-/*    margin-bottom: 10px;*/
-/*    border-radius: 10px;*/
-/*    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);*/
-/*    color: #000;*/
-/*    box-sizing: border-box;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: flex-start; !* Align items to the start (top) *!*/
-/*}*/
 
 .graph-info-card-title {
     height: 50px; /* Set a smaller, fixed height for the title card */
@@ -418,6 +402,13 @@ html, body {
     resize: vertical;
     overflow: auto;
     max-height: 50%;
+}
+
+.lower-box-full {
+    flex-grow: 1;
+    resize: vertical;
+    overflow: auto;
+    max-height: 100%;
 }
 
 .resizer {

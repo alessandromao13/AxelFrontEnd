@@ -63,7 +63,6 @@
                     New Chat
                 </div>
             </div>
-
             <div class="thread-list">
                 <div *ngFor="let thread of gotUserThreads">
                     <div class="thread-box" (click)="changeTab(); showUserMessages(thread.thread_id)">
@@ -76,13 +75,13 @@
     </div>
 
     <div class="right-container">
-        <div class="upper-box">
+        <div class="upper-box" *ngIf="visualizeGraph">
             <div class="graph-diagram-card" *ngIf="visualizeGraph">
                 <app-d3-graph (closeGraphEmitter)="closeGraph()" [graphId]="this.selectedGraphId"></app-d3-graph>
             </div>
         </div>
         <div class="resizer"></div>
-        <div class="lower-box" *ngIf="!visualizeGraph">
+        <div class="lower-box-full" *ngIf="!visualizeGraph">
             <p class="row-title">Your Graphs</p>
             <div *ngFor="let graph of gotUserGraphs">
                 <div class="graph-card-test" (click)="openUserGraph(graph.graph_id)">

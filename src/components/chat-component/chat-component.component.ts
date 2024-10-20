@@ -28,9 +28,6 @@ import {Thread} from "../../modules/Thread";
     styleUrl: './chat-component.component.css'
 })
 export class ChatComponentComponent implements OnInit, AfterViewChecked {
-    // @ViewChild('upperBox', {static: false}) upperBox!: ElementRef<HTMLDivElement>;
-    // @ViewChild('lowerBox', {static: false}) lowerBox!: ElementRef<HTMLDivElement>;
-    // @ViewChild('resizer', {static: false}) resizer!: ElementRef<HTMLDivElement>;
     showGraphToUse = false
     showThreadsList = true
     graphToUse: kg | undefined
@@ -49,6 +46,7 @@ export class ChatComponentComponent implements OnInit, AfterViewChecked {
     visualizeGraph = false
     selectedGraphId: string = ""
     selectedGraph: kg | undefined = undefined
+    selectedThread: Thread | undefined = undefined
     @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
 
     constructor(private location: Location, private graphService: GraphService, private renderer: Renderer2) {
@@ -82,6 +80,8 @@ export class ChatComponentComponent implements OnInit, AfterViewChecked {
 
     showUserMessages(event: any) {
         console.log("GOT THREAD ID", event)
+        this.selectedThread = this.gotUserThreads.find(t => t.thread_id === event)
+
         for (let i = 0; i < this.gotUserThreads.length; i++) {
             const thread = this.gotUserThreads[i];
             if (thread.thread_id == event) {
@@ -167,6 +167,7 @@ export class ChatComponentComponent implements OnInit, AfterViewChecked {
             )
             this.userMessage.content = this.inputField
             this.inputField = ""
+            console.log("sending message", this.selectedThread?.thread_id, this.selectedThread?.usedGraphId)
             this.pushMessage(new Message("USER", this.userMessage.content))
             // todo decommentare per chattare effettivamente
             // this.graphService.executeChatSystem(this.userMessage.content, this.usedGraphId, "1234").subscribe((data) => {
