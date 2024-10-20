@@ -1,2 +1,0 @@
-# AxelFrontEnd
-Frontend di axel
