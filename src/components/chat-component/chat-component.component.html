@@ -1,0 +1,102 @@
+<!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<app-nav-bar></app-nav-bar>
+<div class="main-window">
+    <div class="left-container">
+
+        <div *ngIf="!showThreadsList">
+            <div class="chat-top-bar">
+                <button type="button" class="top-button back-button" (click)="changeTab()">
+                    <i class="fas fa-arrow-left pixel-icon"></i>
+                    <label class="writing">Threads</label>
+                </button>
+                <div *ngIf="this.messages.length > 0">
+                    <button type="button" class="top-button new-chat-button" (click)="newThread()">
+                        <i class="fas fa-comment-dots pixel-icon"></i>
+                        <label class="writing">New Chat</label>
+                    </button>
+                    <button type="button" class="top-button delete-thread-button" (click)="deleteThread()">
+                        <i class="fas fa-trash pixel-icon"></i>
+                        <label class="writing">Delete Chat</label>
+                    </button>
+                </div>
+            </div>
+
+            <div class="message-list" #scrollContainer>
+                <div *ngFor="let message of  threadMessages"
+                     [ngClass]="message.from === 'USER' ? 'message-box-container' : 'message-box-reversed-container'">
+
+                    <!-- Bot message -->
+                    <div *ngIf="message.from === 'BOT'" class="message-box-reversed-container">
+                        <i class="fas fa-robot user-icon bot-icon"></i>
+                        <div class="message-box-reversed"><span>{{ message.content }}</span></div>
+                    </div>
+
+                    <!-- User message -->
+                    <div *ngIf="message.from === 'USER'" class="message-box-container">
+                        <div class="message-box"><span>{{ message.content }}</span></div>
+                        <i class="fas fa-user user-icon"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input">
+                <input class="input-field" type="text" placeholder="Type a message..."
+                       (keydown.enter)="sendMessage()" [(ngModel)]="inputField">
+                <button type="button" class="button send-button"
+                        (click)="sendMessage()"
+                        [disabled]="!inputField">
+                    Send
+                </button>
+
+                <!--          <button type="button" class="loading-icon">-->
+                <!--            <i class="fas fa-spinner"></i> &lt;!&ndash; Icon for "loading" &ndash;&gt;-->
+                <!--          </button>-->
+            </div>
+
+        </div>
+
+        <div *ngIf="showThreadsList">
+            <div class="chat-top-bar">
+                <div class="top-button threads-title-card" (click)="changeTab()">
+                    <i class="pixel-icon"></i>
+                    New Chat
+                </div>
+            </div>
+
+            <div class="thread-list">
+                <div *ngFor="let thread of gotUserThreads">
+                    <div class="thread-box" (click)="changeTab(); showUserMessages(thread.thread_id)">
+                        {{thread.title}}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="right-container">
+        <div class="upper-box">
+            <div class="graph-diagram-card" *ngIf="visualizeGraph">
+                <app-d3-graph (closeGraphEmitter)="closeGraph()" [graphId]="this.selectedGraphId"></app-d3-graph>
+            </div>
+        </div>
+        <div class="resizer"></div>
+        <div class="lower-box" *ngIf="!visualizeGraph">
+            <p class="row-title">Your Graphs</p>
+            <div *ngFor="let graph of gotUserGraphs">
+                <div class="graph-card-test" (click)="openUserGraph(graph.graph_id)">
+                    {{graph.topic}}
+                </div>
+            </div>
+        </div>
+        <div class="lower-box" *ngIf="visualizeGraph">
+            <div class="graph-info-card-title">
+                <p>{{this.selectedGraph?.topic}}</p>
+            </div>
+            <div class="graph-info-card-content">
+                <p>{{this.selectedGraph?.summary}}</p>
+            </div>
+        </div>
+    </div>
+</div>

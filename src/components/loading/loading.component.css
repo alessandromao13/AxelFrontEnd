@@ -1,0 +1,51 @@
+.main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    background-color: #181818;
+    margin: 0;
+    padding: 0;
+}
+
+.title {
+    color: #9D0808; /* White text */
+    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    font-size: 1.5rem; /* Adjust font size */
+    margin-bottom: 1rem; /* Space below the title */
+    text-align: center; /* Center the text */
+}
+
+.loading-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+}
+
+.pixel {
+    width: 15px;
+    height: 15px;
+    background-color: #607d8b; /* Color of the loading pixels */
+    margin: 0 5px;
+    animation: pixel-bounce 0.6s infinite alternate;
+}
+
+.pixel:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.pixel:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes pixel-bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}

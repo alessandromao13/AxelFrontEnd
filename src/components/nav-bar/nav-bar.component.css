@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.head-bar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #262626;
+    padding: 0 2rem;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);
+    height: 6rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    z-index: 1000; /* Ensure navbar is above other elements */
+
+}
+
+
+.top-button {
+    background-color: #212121; /* Default green background */
+    box-shadow: 0 8px #151515; /* 3D button effect */
+    margin-bottom: 1%;
+    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    padding: 12px 24px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    border: 4px solid #212121; /* Darker pixel border */
+    border-radius: 10px; /* Pixel style rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+
+.top-button:hover {
+    background-color: #52626e;
+}
+
+
+.writing {
+    color: #607d8b;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar__menu {
+    list-style: none;
+    display: flex;
+    gap: 2rem; /* Add space between items */
+    padding: 0;
+    margin: 0;
+    align-items: center;
+}
+
+.navbar__item {
+    display: inline-block;
+}
+
+.navbar__link {
+    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    text-decoration: none;
+    color: #04AA6D7F;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: #212121; /* Box background */
+    padding: 10px 20px; /* Add padding for the box effect */
+    border-radius: 8px; /* Slightly rounded corners for the box */
+    border: 2px solid #04AA6D7F; /* Box border color */
+    transition: background-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar__link:hover {
+    background-color: #04AA6D; /* Electric green color on hover */
+    color: #ffffff; /* Change text color to white on hover */
+    box-shadow: 0 0 10px rgba(4, 170, 109, 0.5); /* Soft glow effect */
+    border-color: #04AA6D; /* Electric green border */
+}
+
+.navbar__link i {
+    font-size: 1.2rem;
+}

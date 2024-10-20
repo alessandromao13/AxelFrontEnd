@@ -1,0 +1,36 @@
+<app-nav-bar></app-nav-bar>
+<div class="wrapper">
+    <div *ngIf="!visualizeGraph"
+         class="main-container">
+        <div *ngFor="let graph of gotUserGraphs">
+            <div class="graph-card" (click)="openGraph(graph.graph_id)">
+                <p class="topic">{{graph.topic}}</p>
+            </div>
+        </div>
+        <div *ngIf="loading">
+            <app-loading></app-loading>
+        </div>
+    </div>
+    <div *ngIf="visualizeGraph">
+        <div class="main-container-graph">
+            <div class="graph-diagram-card">
+                <app-d3-graph (closeGraphEmitter)="closeGraph()" [graphId]="this.selectedGraphId"></app-d3-graph>
+            </div>
+            <div class="graph-info-card">
+                <div class="row row-1">
+                    <div class="graph-detail">
+                        <p class="topic"> Details </p>
+                        <p class="summary"> {{this.selectedGraph?.nodes?.length}} Nodes </p>
+                        <p class="summary"> {{this.selectedGraph?.relations?.length}} Edges </p>
+                        <p class="topic">Most used info:</p>
+                        <p class="summary">{{this.mostUsedNode}}</p>
+                    </div>
+                </div>
+                <div class="graph-detail row row-2">
+                    <p class="topic">{{this.selectedGraph?.topic}}</p>
+                    <p class="summary">{{this.selectedGraph?.summary}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

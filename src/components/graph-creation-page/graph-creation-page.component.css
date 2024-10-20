@@ -1,0 +1,289 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+/*.nav-bar {*/
+/*    position: sticky;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    right: 0;*/
+/*    background: black;*/
+/*    color: #0e4f79;*/
+/*    padding: 0 2rem;*/
+/*    box-shadow: 0 0 40px rgba(0, 0, 0, 0.03);*/
+/*    height: 6rem;*/
+/*    display: flex;*/
+/*    align-items: center;*/
+/*    gap: 3rem;*/
+/*}*/
+
+.main {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: calc(100vh - 6rem);
+    gap: 20px;
+    padding: 0 20px;
+    overflow: hidden;
+    background-color: #181818;
+}
+
+.left-box {
+    max-width: 25%;
+}
+
+.middle-box {
+    flex-direction: column;
+}
+
+.left-box, .middle-box, .right-box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    border-radius: 20px;
+    padding: 5%;
+    background-color: #212121;
+    margin: 10px;
+    min-width: 200px;
+    height: calc(100% - 20px);
+    overflow: hidden;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px); /* Slight upward motion */
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0); /* Final position */
+    }
+}
+
+.left-box, .middle-box, .right-box {
+    opacity: 0; /* Initial hidden state */
+    animation: fadeIn 1.5s ease-in-out forwards; /* Apply the animation */
+}
+
+/* Optional: Stagger the animations for each box */
+.left-box {
+    animation-delay: 0.2s;
+}
+
+.middle-box {
+    animation-delay: 0.4s;
+}
+
+.right-box {
+    animation-delay: 0.6s;
+}
+
+
+.writing {
+    color: #607d8b;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.title {
+    font-size: 18px;
+    color: #9D0808;
+    text-align: center;
+    display: block;
+}
+
+.content {
+    text-align: center;
+    margin-top: 5%;
+    margin-bottom: 20%;
+}
+
+.content label {
+    display: block; /* Ensures labels go to new lines */
+    margin-bottom: 5px; /* Add spacing between the labels */
+}
+
+.loading-animation {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.pixel {
+    width: 10px;
+    height: 10px;
+    background-color: #607d8b;
+    margin: 0 5px;
+    margin-bottom: 5%;
+    animation: pixel-bounce 0.6s infinite alternate;
+}
+
+.pixel:nth-child(2) {
+    animation-delay: 0.2s; /* Delay to create staggered effect */
+}
+
+.pixel:nth-child(3) {
+    animation-delay: 0.4s; /* Delay for the third pixel */
+}
+
+@keyframes pixel-bounce {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px); /* Moves the pixel up */
+    }
+}
+
+
+.custom-form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: space-around;
+}
+
+.row-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #607d8b;
+    font-size: 20px;
+    text-align: center; /* Center the text if desired */
+    width: 100%; /* Ensure the title spans the width of the row */
+}
+
+.row-one {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex: 0 0 50px;
+    padding: 10px 0;
+}
+
+.row-two {
+    justify-content: space-evenly;
+    flex: 0 0 50px;
+    padding: 10px 0;
+}
+
+.row-tree {
+    justify-content: space-evenly;
+    flex: 0 0 200px;
+    padding: 40px 0;
+}
+
+.form-row .row-two {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+
+.button {
+    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    padding: 12px 24px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    background-color: #04AA6D; /* Default green background */
+    border: 4px solid #212121; /* Darker pixel border */
+    border-radius: 10px; /* Pixel style rounded corners */
+    cursor: pointer;
+    box-shadow: 0 8px #0e4f79; /* 3D button effect */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.button:hover {
+    background-color: #2ecc71; /* Brighter green on hover */
+    box-shadow: 0 6px #0e4f79; /* Reduce shadow on hover */
+    transform: translateY(2px); /* Slight downward movement */
+}
+
+.button:active {
+    background-color: #04AA6D; /* Revert to original on click */
+    box-shadow: 0 4px #0e4f79;
+    transform: translateY(4px); /* Further downward movement on click */
+}
+
+/* Gray button style for inactive states */
+.grey-button {
+    background-color: #555555; /* Gray background for inactive */
+    box-shadow: 0 8px #333333; /* Darker shadow */
+    cursor: not-allowed; /* Disabled cursor */
+}
+
+/* Blue button style */
+.blue-button {
+    background-color: #007BFF;
+    box-shadow: 0 8px #0056b3;
+}
+
+.send-button {
+    background-color: #e74c3c; /* Red for the send button */
+    box-shadow: 0 8px #c0392b;
+}
+
+.send-button:hover {
+    background-color: #ff5733;
+}
+
+/* Icon styling - adding a pixelated effect */
+.button i {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 1rem;
+    filter: contrast(150%); /* Enhance pixel effect */
+    image-rendering: pixelated; /* Pixelated effect for icons */
+}
+
+
+/* Updated text area styles */
+.input-area-name, .input-area-summary, .input-area-info {
+    width: 100%;
+    padding: 15px 20px;
+    margin: 10px 0;
+    display: inline-block;
+    border: 1px solid #555; /* Darker border for a sleek look */
+    border-radius: 10px; /* Rounded corners */
+    box-sizing: border-box;
+    background-color: #2b2b2b; /* Darker background color */
+    color: #fff; /* White text for contrast */
+    font-size: 16px; /* Slightly larger text for readability */
+    transition: all 0.3s ease; /* Smooth transition for hover/focus effects */
+}
+
+.input-area-name:focus, .input-area-summary:focus, .input-area-info:focus {
+    border-color: #04AA6D; /* Highlighted border on focus */
+    box-shadow: 0 0 10px rgba(4, 170, 109, 0.5); /* Soft green glow on focus */
+    outline: none; /* Remove the default outline */
+}
+
+.input-area-name:hover, .input-area-summary:hover, .input-area-info:hover {
+    background-color: #333; /* Slightly lighter on hover */
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.2); /* Add a subtle shadow on hover */
+}
+
+.input-area-summary, .input-area-info {
+    height: 150px; /* Adjust the height for both text areas */
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.input-area-name:disabled, .input-area-summary:disabled {
+    background-color: #1a1a1a; /* Darker background when disabled */
+    color: #777; /* Lighter text color when disabled */
+    cursor: not-allowed; /* Change the cursor to indicate it's disabled */
+    border-color: #444; /* Darker border when disabled */
+}
+
+

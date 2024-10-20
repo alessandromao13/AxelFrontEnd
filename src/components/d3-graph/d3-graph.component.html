@@ -1,0 +1,26 @@
+<head>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+<body>
+<div class="graph-container-card">
+  <div class="top-bar">
+    <button (click)="closeGraph()" aria-label="Close" class="control-button">
+      <span class="material-icons">close</span>
+    </button>
+    <div class="zoom-controls">
+      <button (click)="zoomIn()" aria-label="Zoom In" class="control-button">
+        <span class="material-icons">zoom_in</span>
+      </button>
+      <button (click)="zoomOut()" aria-label="Zoom Out" class="control-button">
+        <span class="material-icons">zoom_out</span>
+      </button>
+    </div>
+  </div>
+  <svg
+          [attr.width]="width"
+          [attr.height]="height"
+          [attr.viewBox]="viewBox"
+          (mousedown)="onMouseDown($event)"
+          style="cursor: grab;"></svg>
+</div>
+</body>

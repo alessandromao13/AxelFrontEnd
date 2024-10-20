@@ -1,0 +1,473 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    /*overflow: hidden;*/
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.main-window {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    height: calc(100vh - 6rem);
+    gap: 20px;
+    padding: 0 20px;
+    overflow: hidden;
+    background-color: #181818;
+}
+
+.left-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #262626;
+    border-radius: 20px;
+    padding: 0;
+    margin: 10px;
+    min-width: 200px;
+    height: 95%;
+    max-height: 95%; /* Adjust this if needed */
+    overflow: hidden;
+}
+
+
+.thread-box {
+    height: 60%;
+    width: 100%;
+    background-color: #212121; /* Default green background */
+    box-shadow: 0 8px #151515; /* 3D button effect */
+    margin-bottom: 5%;
+    margin-top: 5%;
+    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    border: 4px solid #212121; /* Darker pixel border */
+    border-radius: 10px; /* Pixel style rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+
+.thread-list {
+    flex-grow: 1; /* Allow the thread list to grow and fill the container */
+    display: flex;
+    flex-direction: column;
+    overflow: auto; /* Enable scrolling */
+    width: 90%; /* Set width to full container */
+    background-color: #262626;
+    height: 90%;
+    max-height: 83%;
+    margin-top: 2%;
+    margin-left: 5%;
+    padding: 0; /* Remove padding to use the full width */
+    border-radius: 30px;
+}
+
+.message-list {
+    margin-top: 8px;
+    overflow-y: auto;
+    max-height: 70%;
+    margin-bottom: 50px;
+}
+
+.chat-input {
+    position: fixed;
+    bottom: 0; /* Stick to the bottom of the container */
+    background-color: #1e1c1c;
+    border-radius: 10px;
+    padding: 2%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    /*z-index: 10; !* Ensure it stays on top *!*/
+    /*margin-top: 0; !* Remove margin to prevent unnecessary movement *!*/
+}
+
+.message-box,
+.message-box-reversed {
+    background-color: #11496b; /* or #0d9b05 for reversed */
+    padding: 10px;
+    border-radius: 5px;
+    max-width: 60%;
+    color: white;
+    word-wrap: break-word; /* Ensures long words break */
+    overflow-wrap: break-word; /* Prevents text from overflowing */
+    white-space: normal; /* Allows text to wrap to the next line */
+}
+
+.message-box-reversed {
+    background-color: #0d9b05; /* Different color for reversed */
+}
+
+
+
+
+.top-button {
+    margin-bottom: 1%;
+    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    padding: 12px 24px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    border: 4px solid #212121; /* Darker pixel border */
+    border-radius: 10px; /* Pixel style rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.back-button {
+    /*background-color: #b7b702; !* Default green background *!*/
+    background-color: #212121; /* Default green background */
+    box-shadow: 0 8px #151515; /* 3D button effect */
+    /*box-shadow: 0 8px #7e7e07; !* 3D button effect *!*/
+}
+
+.threads-title-card {
+    background-color: #11496b;
+    box-shadow: 0 8px #11415e;
+    width: 100%;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.new-chat-button {
+    background-color: #212121; /* Default green background */
+    box-shadow: 0 8px #151515; /* 3D button effect */
+    /*background-color: #0E4F79FF; !* Default green background *!*/
+    /*box-shadow: 0 8px #062c42; !* 3D button effect *!*/
+}
+
+.delete-thread-button {
+    background-color: #212121; /* Default green background */
+    box-shadow: 0 8px #151515; /* 3D button effect */
+}
+
+.delete-thread-button:hover {
+    background-color: #52626e;
+}
+
+.threads-title-card:hover {
+    background-color: #0a3349;
+}
+
+.new-chat-button:hover {
+    background-color: #52626e;
+}
+
+.back-button:hover {
+    background-color: #52626e;
+}
+
+
+/* Pixelated icon style */
+.pixel-icon {
+    font-size: 20px; /* Adjust icon size */
+    margin-right: 8px;
+    image-rendering: pixelated; /* Forces pixel rendering */
+    color: #ffffff; /* Icon color */
+}
+
+
+.chat-top-bar {
+    position: sticky;
+    top: 0; /* Make sure it stays at the top */
+    /*background-color: #1e1c1c;*/
+    /*border-radius: 10px;*/
+    padding: 2%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    z-index: 10; /* Ensure it stays on top */
+}
+
+
+.right-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Adjusts the distribution of space */
+    background-color: #212121;
+    border-radius: 20px;
+    padding: 1%; /* Reduced padding for more space */
+    margin: 10px;
+    min-width: 200px;
+    height: 100%;
+    overflow: hidden; /* Ensures no overflow outside the container */
+}
+
+.send-button, .loading-icon {
+    font-family: 'Press Start 2P', cursive;
+    padding: 12px 24px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    color: #ffffff;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    border: 4px solid #212121;
+}
+
+.send-button {
+    background-color: #171616; /* Dark background for send button */
+    color: #9D0808; /* Red color for text/icon */
+    box-shadow: 0 8px #1a1e1f; /* 3D button effect */
+    font-family: 'Press Start 2P', cursive;
+    padding: 12px 24px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 10px;
+    border: 4px solid #212121;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.send-button:active {
+    transform: translateY(2px);
+    box-shadow: 0 4px #1a1e1f; /* Reduce shadow for pressed effect */
+}
+
+
+.loading-icon {
+    background-color: #171616; /* Consistent with send button */
+    color: #9D0808; /* Red color for spinner icon */
+    animation: spin 1s linear infinite;
+}
+
+
+.input-field {
+    background-color: #262525;
+    width: 70%;
+    border: 1px solid transparent; /* Transparent border for a sleek look */
+    padding: 10px;
+    border-radius: 5px; /* Add border-radius for rounded corners */
+    transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth transition */
+    color: #ffffff; /* White text color */
+    font-family: 'Poppins', sans-serif; /* Modern font choice */
+    font-size: 16px; /* Font size */
+}
+
+.input-field:focus {
+    border-color: #04AA6D; /* Same highlighted border on focus */
+    box-shadow: 0 0 10px rgba(4, 170, 109, 0.5); /* Same soft green glow on focus */
+    outline: none; /* Remove default outline */
+}
+
+.upper-box {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #292929;
+    border-radius: 10px;
+    max-height: calc(50% - 10px); /* Set a fixed max-height */
+    width: 100%; /* Take full width of the container */
+    overflow: hidden; /* Hide any overflow to prevent scrollbars */
+    /* Removed overflow: auto; */
+}
+
+.row-title {
+    font-family: 'Press Start 2P', cursive;
+    color: #607d8b;
+    font-size: 20px;
+    text-align: center; /* Center the text if desired */
+    width: 100%; /* Ensure the title spans the width of the row */
+}
+
+
+.lower-box {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin: 5px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #292929;
+    border-radius: 10px;
+    resize: vertical;
+    overflow: auto;
+    max-height: calc(50% - 10px);
+}
+
+.graph-card-test {
+    width: 100%;
+    /*background-color: white;*/
+    padding: 10%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    /*box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);*/
+    color: white;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    background-color: #212121; /* Default green background */
+    box-shadow: 0 8px #151515; /* 3D button effect */
+    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    font-size: 0.8rem;
+
+}
+
+/*.graph-info-card {*/
+/*    width: 100%;*/
+/*    background-color: white;*/
+/*    padding: 10%;*/
+/*    margin-bottom: 10px;*/
+/*    border-radius: 10px;*/
+/*    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);*/
+/*    color: #000;*/
+/*    box-sizing: border-box;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: flex-start; !* Align items to the start (top) *!*/
+/*}*/
+
+.graph-info-card-title {
+    height: 50px; /* Set a smaller, fixed height for the title card */
+    overflow-y: hidden; /* Disable scrolling for the title */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal; /* Allow text to wrap */
+    width: 100%;
+    padding: 10%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: white;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* Center-align the title content */
+    background-color: #212121; /* Default green background */
+    box-shadow: 0 8px #151515; /* 3D button effect */
+    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    font-size: 0.8rem;
+}
+
+.graph-info-card-content {
+    flex-grow: 1; /* Allow the content card to take up all remaining space */
+    padding: 10%;
+    margin-bottom: 10px;
+    border-radius: 10px;
+    color: white;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Align content to the top */
+    max-height: 100%; /* Allow the content to take all remaining height */
+    overflow-y: auto; /* Enable vertical scrolling for content */
+    word-wrap: break-word;
+    overflow-wrap: break-word; /* Break long words if necessary */
+    white-space: normal; /* Allow text to wrap */
+    background-color: #212121; /* Default green background */
+    box-shadow: 0 8px #151515; /* 3D button effect */
+    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    font-size: 0.8rem;
+}
+
+.right-container {
+    resize: none;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.left-container, .upper-box, .lower-box {
+    animation: fadeIn 1.5s ease-in-out forwards;
+    opacity: 0;
+}
+
+.left-container { animation-delay: 0.2s; }
+.upper-box { animation-delay: 0.4s; }
+.lower-box { animation-delay: 0.6s; }
+
+.upper-box, .lower-box {
+    flex-grow: 1;
+    resize: vertical;
+    overflow: auto;
+    max-height: 50%;
+}
+
+.resizer {
+    height: 1.5px;
+    background: #333;
+    cursor: ns-resize;
+}
+
+.lower-box {
+    margin-top: 10px;
+}
+
+
+
+.message-box-container,
+.message-box-reversed-container {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.message-box-container {
+    justify-content: flex-end;
+}
+
+.message-box-reversed-container {
+    justify-content: flex-start;
+}
+
+/* Icon styles */
+.user-icon, .bot-icon {
+    font-size: 24px;
+    margin: 0 10px;
+}
+
+
+.diagram-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #212121;
+    border-radius: 10px;
+    background-color: #292929;
+    box-sizing: border-box;
+    overflow: hidden;
+    animation: fadeIn 1.5s ease-in-out forwards;
+    opacity: 0;
+    visibility: hidden;
+}

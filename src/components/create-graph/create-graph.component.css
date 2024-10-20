@@ -1,0 +1,16 @@
+.form-container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 20px;
+}
+
+.form-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    padding: 20px;
+}

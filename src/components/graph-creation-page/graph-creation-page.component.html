@@ -1,0 +1,100 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+<app-nav-bar></app-nav-bar>
+<div class="main" *ngIf="!loading">
+
+        <div class="left-box">
+            <form class="custom-form">
+                <p class="row-title">Generation type</p>
+                <div class="row-one">
+                    <button type="button"
+                            class="button"
+                            [ngClass]="aiGeneration !== undefined ? (aiGeneration ? 'grey-button' : 'button') : 'button'"
+                            (click)="enableAiGeneration(false)">
+                        <i class="fas fa-hammer"></i>
+                        Manual
+                    </button>
+
+                    <button type="button"
+                            class="button blue-button"
+                            [ngClass]="aiGeneration !== undefined ? (aiGeneration ? 'blue-button' : 'grey-button') : 'blue-button'"
+                            (click)="enableAiGeneration(true)">
+                        <i class="fa fa-microchip"></i>
+                        AI
+                    </button>
+                </div>
+
+                <div class="row-two">
+                    <label class="writing">Document's Title</label>
+                    <input type="text"
+                           class="input-area-name"
+                           placeholder="Title.."
+                           name="title"
+                           [disabled]="aiGeneration === true"
+                           [(ngModel)]="titleTextInput">
+                </div>
+
+                <div class="row-tree">
+                    <label class="writing">Document General Summary</label>
+                    <textarea class="input-area-summary"
+                              placeholder="Summary.."
+                              name="summary"
+                              [disabled]="aiGeneration === true"
+                              [(ngModel)]="summaryTextInput"
+                    ></textarea>
+                </div>
+            </form>
+        </div>
+
+
+        <div class="middle-box">
+            <div class="middle-row">
+                <label class="writing">Document Information's</label>
+                <textarea class="input-area-info" placeholder="Enter some info here.."
+                          [(ngModel)]="infoTextInput"></textarea>
+            </div>
+
+            <button type="button"
+                    class="button send-button"
+                    [disabled]="!checkCanGenerate()"
+                    (click)="generateGraph()">
+                <i class="fa fa-cogs"></i>
+                Generate
+            </button>
+        </div>
+
+        <div class="right-box">
+            <div class="middle-row">
+                <label class="writing">DRAG AND DROP</label>
+                <textarea class="input-area-info" placeholder="Drop a document here.."></textarea>
+            </div>
+        </div>
+</div>
+<div class="main" *ngIf="loading">
+    <div class="middle-box">
+        <div class="middle-row">
+            <label class="writing title">Be right back</label>
+
+            <div class="content">
+                <label class="writing">Your request is being processed</label>
+                <label class="writing">I'll come back to you when I catch up..</label>
+                <label class="writing">Or you can just stick around for a bit!</label>
+            </div>
+
+            <div class="loading-animation">
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+                <div class="pixel"></div>
+            </div>
+        </div>
+
+<!--        <button type="button"-->
+<!--                class="button blue-button"-->
+<!--                (click)="backToPageView()">-->
+<!--            <i class="fa fa-cogs"></i>-->
+<!--            Create More Graphs Meanwhile?-->
+<!--        </button>-->
+    </div>
+
+
+</div>

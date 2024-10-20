@@ -1,0 +1,209 @@
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+        visibility: hidden;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        visibility: visible;
+    }
+}
+
+body {
+    margin: 0;
+    background-color: #181818;
+}
+
+.wrapper {
+    background-color: #181818;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.main-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    padding: 1rem;
+    height: calc(100vh - 6rem);
+    overflow-y: auto;
+    animation: fadeIn 1.5s ease-in-out forwards;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.main-container-graph {
+    display: flex;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 1rem;
+    height: calc(100vh - 6rem);
+    overflow-y: hidden;
+    animation: fadeIn 1.5s ease-in-out forwards;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.graph-info-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #212121;
+    border-radius: 10px;
+    background-color: #292929;
+    box-sizing: border-box;
+    overflow: hidden;
+    animation: fadeIn 1.5s ease-in-out forwards;
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+.row {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #282828;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    overflow: auto;
+    transition: background-color 0.3s ease;
+    animation: fadeIn 1.5s ease-in-out forwards;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.row-1 {
+    max-height: 35%; /* Row 1 takes up 35% of the height */
+    flex: 0 0 35%; /* Prevent Row 1 from growing, stays at 35% height */
+    background-color: #282828; /* Background for Row 1 */
+    color: white; /* Text color for contrast */
+    overflow: hidden;
+}
+
+.row-2 {
+    flex: 1;
+    display: flex;
+    flex-direction: column; /* Arrange items in a column */
+    background-color: #282828; /* Background for Row 2 */
+    color: white; /* Text color for contrast */
+}
+
+.row-1 {
+    animation-delay: 0.2s;
+}
+
+.row-2 {
+    animation-delay: 0.4s;
+}
+
+.graph-card {
+    margin-top: 8%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    max-width: 20rem;
+    height: 25vh;
+    background-color: #282828;
+    border: 4px solid #212121;
+    border-radius: 10px;
+    padding: 1.5rem;
+    box-shadow: 0 0.8rem #0e4f79;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+    color: #181818;
+    position: relative; /* Ensure the container can hold absolute children */
+    animation: fadeIn 1.5s ease-in-out forwards; /* Apply fade-in */
+    opacity: 0; /* Initial state for animation */
+    visibility: hidden; /* Initially hidden */
+    overflow: hidden;
+}
+
+/* Hover effect similar to buttons */
+.graph-card:hover {
+    background-color: #607d8b;
+    box-shadow: 0 0.6rem #0e4f79;
+    transform: translateY(-0.3rem);
+}
+
+/* Style for the text inside the card to match the button look */
+.graph-card p {
+    margin: 0.5rem 0;
+    font-size: 0.8rem;
+    line-height: 1.5;
+}
+
+.graph-card .topic {
+    font-size: 1rem;
+    color: #11669b;
+    margin-bottom: 0.5rem;
+}
+
+.graph-card .summary {
+    font-size: 0.9rem;
+    color: #B0BEC5;
+}
+
+
+.graph-detail {
+    padding: 1rem;
+    color: white;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive;
+}
+
+.graph-detail .topic {
+    font-size: 1rem;
+    color: #11669b;
+    margin-bottom: 0.5rem;
+}
+
+.graph-detail .summary {
+    font-size: 0.9rem;
+    color: #B0BEC5;
+}
+
+.graph-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: #212121;
+    border-radius: 20px;
+    padding: 0;
+    margin: 10px;
+    min-width: 200px;
+    max-height: 97vh;
+    overflow: hidden;
+    animation: fadeIn 1.5s ease-in-out forwards;
+    opacity: 0;
+    visibility: hidden;
+}
+
+
+.graph-diagram-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+    height: 100%;
+    border: 4px solid #212121;
+    border-radius: 10px;
+    background-color: #292929;
+    box-sizing: border-box;
+    overflow: hidden;
+    animation: fadeIn 1.5s ease-in-out forwards;
+    opacity: 0;
+    visibility: hidden;
+}
