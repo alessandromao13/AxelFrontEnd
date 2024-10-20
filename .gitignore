@@ -1,0 +1,49 @@
+# Node.js dependencies
+node_modules/
+
+# Angular build artifacts
+dist/
+out-tsc/
+build/
+tmp/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment files
+src/environments/environment*.ts
+
+# IDE or editor specific files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Compiled TypeScript files
+*.js
+*.d.ts
+
+# Coverage files for testing
+coverage/
+
+# Temporary files
+tmp/
+temp/
+
+# Mac OS specific files
+.DS_Store
+Thumbs.db
+
+# Ignore .icloud files
+*.icloud
+
+# Angular cache
+.angular/cache/
+
+# Generated files
+*.bak
+*.swp
