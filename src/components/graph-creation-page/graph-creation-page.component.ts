@@ -8,6 +8,8 @@ import {GraphService} from "../../services/graph.service";
 import {MatDialog} from "@angular/material/dialog";
 import {User} from "../../modules/User";
 import {GraphCreatedDialogComponent} from "../graph-created-dialog/graph-created-dialog.component";
+import {HttpClient} from "@angular/common/http";
+import {FileUploadComponentComponent} from "../file-upload-component/file-upload-component.component";
 
 @Component({
     selector: 'app-graph-creation-page',
@@ -18,7 +20,8 @@ import {GraphCreatedDialogComponent} from "../graph-created-dialog/graph-created
         DragAndDropComponent,
         NgClass,
         FormsModule,
-        NgIf
+        NgIf,
+        FileUploadComponentComponent
     ],
     templateUrl: './graph-creation-page.component.html',
     styleUrl: './graph-creation-page.component.css'
@@ -30,9 +33,13 @@ export class GraphCreationPageComponent implements OnInit {
     infoTextInput: string = ""
     loading: boolean = false
     myUser: User = new User()
+    uploadedFile: File | undefined = undefined
+    fileName = '';
+    protected readonly undefined = undefined;
 
-    constructor(private graphService: GraphService, private dialog: MatDialog) {
+    constructor(private graphService: GraphService, private dialog: MatDialog, private http: HttpClient) {
     }
+
 
     ngOnInit() {
     }
@@ -48,16 +55,20 @@ export class GraphCreationPageComponent implements OnInit {
         if (this.aiGeneration) {
             return (this.titleTextInput == "" && this.summaryTextInput == "" && this.infoTextInput.length > 0)
         } else {
-            return (this.titleTextInput.length > 0 && this.summaryTextInput.length > 0 && this.infoTextInput.length > 0)
+            return ((this.titleTextInput.length > 0 && this.summaryTextInput.length > 0 && this.infoTextInput.length > 0) || this.uploadedFile)
         }
     }
 
-
-    resetPage(){
+    resetPage() {
         this.summaryTextInput = ""
         this.titleTextInput = ""
         this.infoTextInput = ""
         this.loading = false
+    }
+
+    updateUploadedFile(event: any) {
+        console.log("PARENT GOT FILE", event)
+        this.uploadedFile = event
     }
 
     generateGraph() {
@@ -67,17 +78,17 @@ export class GraphCreationPageComponent implements OnInit {
             this.summaryTextInput = ""
             this.titleTextInput = ""
         }
-
-        this.graphService.generateGraph(this.myUser.user_id, this.infoTextInput, this.titleTextInput, this.summaryTextInput).subscribe(data => {
-            this.openSuccessDialog();
-            this.resetPage()
-        });
-
-        // setTimeout(() => {
-        //     this.openSuccessDialog();
-        //     this.resetPage();
-        // }, 5000);
-
+        if (this.uploadedFile) {
+            this.graphService.generateGraphWithPDF(this.myUser.user_id,  this.titleTextInput, this.summaryTextInput, this.uploadedFile).subscribe(data =>{
+                this.openSuccessDialog()
+                this.resetPage()
+            })
+        } else {
+            this.graphService.generateGraph(this.myUser.user_id, this.infoTextInput, this.titleTextInput, this.summaryTextInput).subscribe(data => {
+                this.openSuccessDialog()
+                this.resetPage()
+            });
+        }
         this.emptyFields()
     }
 
@@ -87,16 +98,13 @@ export class GraphCreationPageComponent implements OnInit {
         });
     }
 
-    emptyFields(){
+    emptyFields() {
         this.infoTextInput = ""
         this.summaryTextInput = ""
         this.titleTextInput = ""
     }
 
-    backToPageView(){
+    backToPageView() {
         this.loading = false
     }
-
-
-    protected readonly undefined = undefined;
 }

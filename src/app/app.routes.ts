@@ -6,6 +6,7 @@ import {ChatComponentComponent} from "../components/chat-component/chat-componen
 import {CreateGraphComponent} from "../components/create-graph/create-graph.component";
 import {DragAndDropComponent} from "../components/drag-and-drop/drag-and-drop.component";
 import {GraphCreationPageComponent} from "../components/graph-creation-page/graph-creation-page.component";
+import {FileUploadComponentComponent} from "../components/file-upload-component/file-upload-component.component";
 
 
 export const routes: Routes = [
@@ -16,6 +17,7 @@ export const routes: Routes = [
   { path: 'create-new-graph', component: GraphCreationPageComponent },
   // todo remove this after implementation of new graph form
   { path: 'create-new-graph-old', component: NewGraphComponent },
+  { path: 'file-uploader-test', component: FileUploadComponentComponent },
   // { path: 'drag-and-drop-test', component: DragAndDropComponent },
 
 ];

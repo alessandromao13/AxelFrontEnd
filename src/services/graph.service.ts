@@ -54,6 +54,22 @@ export class GraphService {
     return this.http.post<{ userGraphs: any[] }>(`${this.baseUrl}/generate-graph/${user_id_cast}`, body);
   }
 
+
+  generateGraphWithPDF(userId: string, topic: string, summary: string, uploadedFile: File): Observable<{ userGraphs: any[] }> {
+    const formData = new FormData();
+    formData.append('file', uploadedFile);
+    formData.append('topic', topic);
+    formData.append('summary', summary);
+    const user_id_cast = Number(userId);
+    return this.http.post<{ userGraphs: any[] }>(`${this.baseUrl}/generate-graph-pdf/${user_id_cast}`, formData, {
+      reportProgress: true,
+      observe: 'response'
+    }).pipe(
+        map(response => response.body as { userGraphs: any[] })
+    );
+  }
+
+
   getNewThreadID(){
     return this.http
         .get(`${this.baseUrl}/new-thread`)

@@ -1,0 +1,10 @@
+<input type="file" class="file-input"
+       [accept]="requiredFileType"
+       (change)="onFileSelected($event)" #fileUpload>
+
+<div class="file-upload">
+    {{ fileName || ''}}
+    <div *ngIf="fileUploaded">
+        <button (click)="removeFile()">X</button>
+    </div>
+</div>

@@ -15,6 +15,10 @@ export class NavBarComponent {
     this.router.navigate(['/create-new-graph']);
   }
 
+  showFileUploader() {
+    this.router.navigate(['/file-uploader-test']);
+  }
+
   openGraphs() {
     this.router.navigate(['/graph-gallery']);
   }
