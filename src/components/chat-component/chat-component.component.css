@@ -21,6 +21,7 @@ html, body {
 }
 
 .left-container {
+    position: relative;
     flex: 1;
     display: flex;
     flex-direction: column;
@@ -28,12 +29,18 @@ html, body {
     border-radius: 20px;
     padding: 0;
     margin: 10px;
-    min-width: 200px;
+    min-width: 50%;
+    max-width: 50%;
     height: 95%;
-    max-height: 95%; /* Adjust this if needed */
+    max-height: 95%;
     overflow: hidden;
 }
 
+.message-list {
+    overflow: auto;
+    max-height: 600px;
+    /*margin-bottom: 600px;*/
+}
 
 .thread-box {
     height: 60%;
@@ -72,16 +79,9 @@ html, body {
     border-radius: 30px;
 }
 
-.message-list {
-    margin-top: 8px;
-    overflow-y: auto;
-    max-height: 70%;
-    margin-bottom: 50px;
-}
-
 .chat-input {
     position: fixed;
-    bottom: 0; /* Stick to the bottom of the container */
+    bottom: 0;
     background-color: #1e1c1c;
     border-radius: 10px;
     padding: 2%;
@@ -89,8 +89,6 @@ html, body {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    /*z-index: 10; !* Ensure it stays on top *!*/
-    /*margin-top: 0; !* Remove margin to prevent unnecessary movement *!*/
 }
 
 .message-box,
@@ -108,9 +106,6 @@ html, body {
 .message-box-reversed {
     background-color: #0d9b05; /* Different color for reversed */
 }
-
-
-
 
 .top-button {
     margin-bottom: 1%;
@@ -147,8 +142,6 @@ html, body {
 .new-chat-button {
     background-color: #212121; /* Default green background */
     box-shadow: 0 8px #151515; /* 3D button effect */
-    /*background-color: #0E4F79FF; !* Default green background *!*/
-    /*box-shadow: 0 8px #062c42; !* 3D button effect *!*/
 }
 
 .delete-thread-button {
@@ -184,15 +177,13 @@ html, body {
 
 .chat-top-bar {
     position: sticky;
-    top: 0; /* Make sure it stays at the top */
-    /*background-color: #1e1c1c;*/
-    /*border-radius: 10px;*/
+    top: 0;
     padding: 2%;
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
-    z-index: 10; /* Ensure it stays on top */
+    z-index: 10;
 }
 
 

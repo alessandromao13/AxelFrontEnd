@@ -10,19 +10,20 @@
                     <i class="fas fa-arrow-left pixel-icon"></i>
                     <label class="writing">Threads</label>
                 </button>
-                <div *ngIf="this.messages.length > 0">
-                    <button type="button" class="top-button new-chat-button" (click)="newThread()">
-                        <i class="fas fa-comment-dots pixel-icon"></i>
-                        <label class="writing">New Chat</label>
-                    </button>
-                    <button type="button" class="top-button delete-thread-button" (click)="deleteThread()">
-                        <i class="fas fa-trash pixel-icon"></i>
-                        <label class="writing">Delete Chat</label>
-                    </button>
-                </div>
+
+                <button *ngIf="this.threadMessages.length > 0" type="button" class="top-button new-chat-button"
+                        (click)="newThread()">
+                    <i class="fas fa-comment-dots pixel-icon"></i>
+                    <label class="writing">New Chat</label>
+                </button>
+                <button *ngIf="this.threadMessages.length > 0" type="button" class="top-button delete-thread-button" (click)="deleteThread()">
+                    <i class="fas fa-trash pixel-icon"></i>
+                    <label class="writing">Delete Chat</label>
+                </button>
+
             </div>
 
-            <div class="message-list" #scrollContainer>
+            <div class="message-list" #messageListContainer>
                 <div *ngFor="let message of  threadMessages"
                      [ngClass]="message.from === 'USER' ? 'message-box-container' : 'message-box-reversed-container'">
 
@@ -42,7 +43,7 @@
 
             <div class="chat-input">
                 <input class="input-field" type="text" placeholder="Type a message..."
-                       (keydown.enter)="sendMessage()" [(ngModel)]="inputField">
+                       (keydown.enter)="sendMessage()" [(ngModel)]="inputField" [disabled]="this.disableInput">
                 <button type="button" class="button send-button"
                         (click)="sendMessage()"
                         [disabled]="!inputField">
@@ -66,7 +67,7 @@
             <div class="thread-list">
                 <div *ngFor="let thread of gotUserThreads">
                     <div class="thread-box" (click)="changeTab(); showUserMessages(thread.thread_id)">
-                        {{thread.title}}
+                        {{ thread.messages[0].content }}
                     </div>
                 </div>
             </div>
@@ -85,16 +86,16 @@
             <p class="row-title">Your Graphs</p>
             <div *ngFor="let graph of gotUserGraphs">
                 <div class="graph-card-test" (click)="openUserGraph(graph.graph_id)">
-                    {{graph.topic}}
+                    {{ graph.topic }}
                 </div>
             </div>
         </div>
         <div class="lower-box" *ngIf="visualizeGraph">
             <div class="graph-info-card-title">
-                <p>{{this.selectedGraph?.topic}}</p>
+                <p>{{ this.selectedGraph?.topic }}</p>
             </div>
             <div class="graph-info-card-content">
-                <p>{{this.selectedGraph?.summary}}</p>
+                <p>{{ this.selectedGraph?.summary }}</p>
             </div>
         </div>
     </div>

@@ -21,10 +21,11 @@ export class GraphService {
   }
 
 
-  executeChatSystem(userQuery: string, graphId: string, userId: string): Observable<ChatResponse> {
+  executeChatSystem(userQuery: string, graphId: string, userId: string, threadId: string | undefined): Observable<ChatResponse> {
     const body = {
       user_query: userQuery,
       graph_id: graphId,
+      thread_id: threadId
     };
     return this.http.post<ChatResponse>(`${this.baseUrl}/chat/${userId}`, body);
   }
@@ -51,6 +52,18 @@ export class GraphService {
     // fixme: fix this everywhere
     const user_id_cast =  Number(userId);
     return this.http.post<{ userGraphs: any[] }>(`${this.baseUrl}/generate-graph/${user_id_cast}`, body);
+  }
+
+  getNewThreadID(){
+    return this.http
+        .get(`${this.baseUrl}/new-thread`)
+        .pipe(map(value => value as string));
+  }
+
+  deleteChat(thread_id: string){
+    return this.http
+        .get(`${this.baseUrl}/delete-thread/${thread_id}`)
+        .pipe(map(value => value as string));
   }
 
 

@@ -3,6 +3,7 @@ import {GraphEdge, GraphNode} from "./Graph";
 export class ChatResponse {
   llm_res: string = ""
   context: string = ""
+  thread_id: string = ""
   nodes: GraphNode[] = []
   edges: GraphEdge[] = []
 }

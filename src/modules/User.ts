@@ -1,5 +1,5 @@
 export class User {
   name: string = "John"
   surname: string = "Doe"
-  user_id: string = "1"
+  user_id: string = "1234"
 }

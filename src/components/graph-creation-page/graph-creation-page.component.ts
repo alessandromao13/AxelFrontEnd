@@ -67,20 +67,16 @@ export class GraphCreationPageComponent implements OnInit {
             this.summaryTextInput = ""
             this.titleTextInput = ""
         }
-        // console.log("INPUTS")
-        // console.log("Title", this.titleTextInput)
-        // console.log("Summary", this.summaryTextInput)
-        // console.log("testo", this.infoTextInput)
-        //
-        // this.graphService.generateGraph(this.myUser.user_id, this.titleTextInput, this.summaryTextInput, this.infoTextInput).subscribe(data => {
-        //     this.openSuccessDialog();
-        //     this.resetPage()
-        // });
 
-        setTimeout(() => {
+        this.graphService.generateGraph(this.myUser.user_id, this.infoTextInput, this.titleTextInput, this.summaryTextInput).subscribe(data => {
             this.openSuccessDialog();
-            this.resetPage();
-        }, 5000);
+            this.resetPage()
+        });
+
+        // setTimeout(() => {
+        //     this.openSuccessDialog();
+        //     this.resetPage();
+        // }, 5000);
 
         this.emptyFields()
     }
