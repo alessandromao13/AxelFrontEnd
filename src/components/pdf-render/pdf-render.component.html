@@ -1,0 +1,7 @@
+<div *ngIf="pdfUrl; else noPdf">
+    <iframe [src]="pdfUrl" width="100%" height="600px"></iframe>
+</div>
+
+<ng-template #noPdf>
+    <p>No PDF available to render.</p>
+</ng-template>

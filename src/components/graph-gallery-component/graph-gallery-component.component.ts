@@ -6,6 +6,9 @@ import {kg} from "../../modules/Graph";
 import {D3GraphComponent} from "../d3-graph/d3-graph.component";
 import {NavBarComponent} from "../nav-bar/nav-bar.component";
 import {LoadingComponent} from "../loading/loading.component";
+import {User} from "../../modules/User";
+import {UserDocument} from "../../modules/Document";
+import {PdfRenderComponent} from "../pdf-render/pdf-render.component";
 
 
 @Component({
@@ -18,7 +21,8 @@ import {LoadingComponent} from "../loading/loading.component";
         D3GraphComponent,
         NgClass,
         NavBarComponent,
-        LoadingComponent
+        LoadingComponent,
+        PdfRenderComponent
     ],
     templateUrl: './graph-gallery-component.component.html',
     styleUrl: './graph-gallery-component.component.css'
@@ -26,21 +30,31 @@ import {LoadingComponent} from "../loading/loading.component";
 export class GraphGalleryComponentComponent implements OnInit {
 
     gotUserGraphs: kg[] = []
+    gotUserDocuments: UserDocument[] = []
+    selectedDocument: UserDocument = new UserDocument()
     visualizeGraph = false
+    visualizeDocument = false
     selectedGraphId = ""
     loading = false
     selectedGraph: kg | undefined = undefined
     mostUsedNode: string = ""
+    myUser: User = new User()
+    documentsTab: boolean = false
 
     constructor(private location: Location, private graphService: GraphService) {
     }
 
     ngOnInit() {
-        // Call the service to get graphs by user ID
         this.loading = true
-        this.graphService.getGraphsByUserId("1").subscribe((data) => {
+        this.graphService.getGraphsByUserId(this.myUser.user_id).subscribe((data) => {
             this.gotUserGraphs = data
-            console.log("OOOOO DATA", this.gotUserGraphs)
+            console.log("GOT GRAPHS", this.gotUserGraphs)
+            this.loading = false
+        });
+
+        this.graphService.getUserDocumentsByUseId(this.myUser.user_id).subscribe((data) => {
+            console.log("GOT DOCUMENTS", data)
+            this.gotUserDocuments = data
             this.loading = false
         });
     }
@@ -57,13 +71,25 @@ export class GraphGalleryComponentComponent implements OnInit {
         this.location.back();
     }
 
-
     openGraph(graphId: string) {
         console.log("GOT GRAPH TO OPEN", graphId)
         this.visualizeGraph = true
         this.selectedGraphId = graphId
         this.getGraphById(graphId)
+    }
 
+    openDocument(document: UserDocument) {
+        this.visualizeDocument = true;
+        this.selectedDocument = new UserDocument();
+        this.selectedDocument.title = document.title;
+        this.selectedDocument.rag_id = document.rag_id;
+        this.selectedDocument.document_id = document.document_id;
+        this.selectedDocument.document = document.document;
+        console.log("OPENING PDF", this.selectedDocument);
+    }
+
+    switchView(){
+        this.documentsTab = !this.documentsTab
     }
 
     getGraphById(graphId: any) {
@@ -77,7 +103,6 @@ export class GraphGalleryComponentComponent implements OnInit {
     }
 
     getMostUsedNodes(selectedGraph: kg | undefined){
-        console.log("TRYYYYYY")
         if (selectedGraph !== undefined) {
             const result = this.getMaxUsageRelation(selectedGraph)
             console.log(result)
@@ -88,15 +113,12 @@ export class GraphGalleryComponentComponent implements OnInit {
     }
 
     getMaxUsageRelation(graph: kg): any | null {
-        // Filter out relations with null usage_weight
         const validRelations = graph.relations.filter(relation => relation.usage_weight !== null);
 
-        // Return null if there are no valid relations
         if (validRelations.length === 0) {
             return null;
         }
 
-        // Find the relation with the maximum usage_weight
         return validRelations.reduce((max, relation) => {
             return (relation.usage_weight! > max.usage_weight!) ? relation : max;
         });

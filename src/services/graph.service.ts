@@ -5,6 +5,7 @@ import { map } from 'rxjs/operators';
 import {kg} from "../modules/Graph";
 import {ChatResponse} from "../modules/ChatResponse";
 import {Thread} from "../modules/Thread";
+import {UserDocument} from "../modules/Document";
 
 @Injectable({
   providedIn: 'root' // This makes the service available throughout the app
@@ -57,11 +58,12 @@ export class GraphService {
 
   generateGraphWithPDF(userId: string, topic: string, summary: string, uploadedFile: File): Observable<{ userGraphs: any[] }> {
     const formData = new FormData();
-    formData.append('file', uploadedFile);
-    formData.append('topic', topic);
-    formData.append('summary', summary);
+    formData.append('uploaded_file', uploadedFile); // Match the backend key 'uploaded_file'
+    formData.append('topic', topic); // Match the backend key 'topic'
+    formData.append('summary', summary); // Match the backend key 'summary'
+
     const user_id_cast = Number(userId);
-    return this.http.post<{ userGraphs: any[] }>(`${this.baseUrl}/generate-graph-pdf/${user_id_cast}`, formData, {
+    return this.http.post<{ userGraphs: any[] }>(`${this.baseUrl}/generate-rag-pdf/${user_id_cast}`, formData, {
       reportProgress: true,
       observe: 'response'
     }).pipe(
@@ -69,6 +71,12 @@ export class GraphService {
     );
   }
 
+  getUserDocumentsByUseId(user_id: string) {
+    console.log("GETTING USER DOCS BY ID", user_id)
+    return this.http
+        .get(`${this.baseUrl}/user-rags/${user_id}`)
+        .pipe(map(value => value as UserDocument[]));
+  }
 
   getNewThreadID(){
     return this.http

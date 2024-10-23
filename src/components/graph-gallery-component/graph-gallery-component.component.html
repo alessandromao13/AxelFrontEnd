@@ -1,10 +1,29 @@
 <app-nav-bar></app-nav-bar>
 <div class="wrapper">
-    <div *ngIf="!visualizeGraph"
+    <div class="button-container">
+        <button type="button"
+                class="button view-button"
+                (click)="switchView()">
+            <i class="fa fa-cogs"></i>
+            {{ documentsTab ? 'View Graphs' : 'View Documents' }}
+        </button>
+    </div>
+    <div *ngIf="!visualizeGraph && !documentsTab"
          class="main-container">
         <div *ngFor="let graph of gotUserGraphs">
             <div class="graph-card" (click)="openGraph(graph.graph_id)">
-                <p class="topic">{{graph.topic}}</p>
+                <p class="topic">{{ graph.topic }}</p>
+            </div>
+        </div>
+        <div *ngIf="loading">
+            <app-loading></app-loading>
+        </div>
+    </div>
+    <div *ngIf="!visualizeGraph && documentsTab && !visualizeDocument"
+         class="main-container">
+        <div *ngFor="let document of gotUserDocuments">
+            <div class="graph-card" (click)="openDocument(document)">
+                <p class="topic">{{ document.title }}</p>
             </div>
         </div>
         <div *ngIf="loading">
@@ -20,17 +39,20 @@
                 <div class="row row-1">
                     <div class="graph-detail">
                         <p class="topic"> Details </p>
-                        <p class="summary"> {{this.selectedGraph?.nodes?.length}} Nodes </p>
-                        <p class="summary"> {{this.selectedGraph?.relations?.length}} Edges </p>
+                        <p class="summary"> {{ this.selectedGraph?.nodes?.length }} Nodes </p>
+                        <p class="summary"> {{ this.selectedGraph?.relations?.length }} Edges </p>
                         <p class="topic">Most used info:</p>
-                        <p class="summary">{{this.mostUsedNode}}</p>
+                        <p class="summary">{{ this.mostUsedNode }}</p>
                     </div>
                 </div>
                 <div class="graph-detail row row-2">
-                    <p class="topic">{{this.selectedGraph?.topic}}</p>
-                    <p class="summary">{{this.selectedGraph?.summary}}</p>
+                    <p class="topic">{{ this.selectedGraph?.topic }}</p>
+                    <p class="summary">{{ this.selectedGraph?.summary }}</p>
                 </div>
             </div>
         </div>
+    </div>
+    <div *ngIf="visualizeDocument">
+        <app-pdf-render [userDocument]="this.selectedDocument"></app-pdf-render>
     </div>
 </div>
