@@ -65,17 +65,17 @@ html, body {
 
 
 .thread-list {
-    flex-grow: 1; /* Allow the thread list to grow and fill the container */
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    overflow: auto; /* Enable scrolling */
-    width: 90%; /* Set width to full container */
+    overflow: auto;
+    width: 90%;
     background-color: #262626;
     height: 90%;
     max-height: 83%;
-    margin-top: 2%;
+    /*margin-top: 2%;*/
     margin-left: 5%;
-    padding: 0; /* Remove padding to use the full width */
+    padding: 0;
     border-radius: 30px;
 }
 
@@ -175,6 +175,7 @@ html, body {
 }
 
 
+
 .chat-top-bar {
     position: sticky;
     top: 0;
@@ -191,14 +192,35 @@ html, body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Adjusts the distribution of space */
+    justify-content: space-between;
     background-color: #212121;
     border-radius: 20px;
-    padding: 1%; /* Reduced padding for more space */
+    padding: 1%;
     margin: 10px;
     min-width: 200px;
     height: 100%;
-    overflow: hidden; /* Ensures no overflow outside the container */
+    overflow: hidden;
+    animation: fadeIn 1.5s ease-in-out forwards;
+}
+
+.icon-spacing {
+    margin-right: 3%;
+}
+
+
+.selection-container {
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #212121;
+    border-radius: 20px;
+    padding: 1%;
+    margin: 10px;
+    min-width: 200px;
+    overflow: hidden;
 }
 
 .send-button, .loading-icon {
@@ -267,27 +289,25 @@ html, body {
 }
 
 .upper-box {
-    flex-grow: 1;
-    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin: 5px;
     padding: 10px;
     box-sizing: border-box;
     background-color: #292929;
     border-radius: 10px;
-    max-height: calc(50% - 10px); /* Set a fixed max-height */
-    width: 100%; /* Take full width of the container */
-    overflow: hidden; /* Hide any overflow to prevent scrollbars */
+    height: 50%;
+    width: 100%;
+    overflow: hidden;
+    margin-top: 0;
 }
 
 .row-title {
     font-family: 'Press Start 2P', cursive;
     color: #607d8b;
     font-size: 20px;
-    text-align: center; /* Center the text if desired */
-    width: 100%; /* Ensure the title spans the width of the row */
+    text-align: center;
+    width: 100%;
 }
 
 
@@ -304,8 +324,9 @@ html, body {
     border-radius: 10px;
     resize: vertical;
     overflow: auto;
-    max-height: calc(50% - 10px);
+    /*max-height: calc(50% - 10px);*/
 }
+
 
 .graph-card-test {
     width: 100%;
@@ -318,13 +339,12 @@ html, body {
     justify-content: center;
     align-items: center;
     overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: normal;
     background-color: #1c1c1c;
     box-shadow: 0 8px #151515;
     font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
-
+    text-align: center; /* Center the text */
 }
 
 
@@ -375,8 +395,14 @@ html, body {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .left-container, .upper-box, .lower-box {
@@ -384,15 +410,23 @@ html, body {
     opacity: 0;
 }
 
-.left-container { animation-delay: 0.2s; }
-.upper-box { animation-delay: 0.4s; }
-.lower-box { animation-delay: 0.6s; }
+.left-container {
+    animation-delay: 0.2s;
+}
+
+.upper-box {
+    animation-delay: 0.4s;
+}
+
+.lower-box {
+    animation-delay: 0.6s;
+}
 
 .upper-box, .lower-box {
     flex-grow: 1;
-    resize: vertical;
-    overflow: auto;
-    max-height: 50%;
+    /*resize: vertical;*/
+    /*overflow: auto;*/
+    /*max-height: 50%;*/
 }
 
 .lower-box-full {
@@ -402,16 +436,15 @@ html, body {
     max-height: 100%;
 }
 
-.resizer {
-    height: 1.5px;
-    background: #333;
-    cursor: ns-resize;
+
+.pdf-visualization {
+    width: 100%;
+    height: 100%;
 }
 
 .lower-box {
     margin-top: 10px;
 }
-
 
 
 .message-box-container,

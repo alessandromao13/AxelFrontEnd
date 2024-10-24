@@ -9,6 +9,9 @@ import {LoadingComponent} from "../loading/loading.component";
 import {User} from "../../modules/User";
 import {UserDocument} from "../../modules/Document";
 import {PdfRenderComponent} from "../pdf-render/pdf-render.component";
+import {PdfResponse} from "../../modules/PdfResponse";
+import {WarningDialogComponentComponent} from "../warning-dialog-component/warning-dialog-component.component";
+import {MatDialog} from "@angular/material/dialog";
 
 
 @Component({
@@ -41,20 +44,27 @@ export class GraphGalleryComponentComponent implements OnInit {
     myUser: User = new User()
     documentsTab: boolean = false
 
-    constructor(private location: Location, private graphService: GraphService) {
+    constructor(private location: Location, private graphService: GraphService, private dialog: MatDialog) {
     }
 
     ngOnInit() {
         this.loading = true
-        this.graphService.getGraphsByUserId(this.myUser.user_id).subscribe((data) => {
-            this.gotUserGraphs = data
-            console.log("GOT GRAPHS", this.gotUserGraphs)
-            this.loading = false
-        });
+        this.getUserDocuments()
+        this.getUserGraphs()
+    }
 
+    getUserDocuments() {
         this.graphService.getUserDocumentsByUseId(this.myUser.user_id).subscribe((data) => {
             console.log("GOT DOCUMENTS", data)
             this.gotUserDocuments = data
+            this.loading = false
+        });
+    }
+
+    getUserGraphs() {
+        this.graphService.getGraphsByUserId(this.myUser.user_id).subscribe((data) => {
+            this.gotUserGraphs = data
+            console.log("GOT GRAPHS", this.gotUserGraphs)
             this.loading = false
         });
     }
@@ -79,17 +89,51 @@ export class GraphGalleryComponentComponent implements OnInit {
     }
 
     openDocument(document: UserDocument) {
-        this.visualizeDocument = true;
         this.selectedDocument = new UserDocument();
         this.selectedDocument.title = document.title;
         this.selectedDocument.rag_id = document.rag_id;
         this.selectedDocument.document_id = document.document_id;
-        this.selectedDocument.document = document.document;
+        console.log("DOCUMENT ID", this.selectedDocument.document_id)
+        this.getUserPDF(document.document_id)
         console.log("OPENING PDF", this.selectedDocument);
+    }
+
+
+    getUserPDF(document_id: any) {
+        this.graphService.getUserPDF(this.myUser.user_id, document_id).subscribe((response: PdfResponse) => {
+            this.selectedDocument.document = response.got_pdf;
+            this.visualizeDocument = true;
+        });
     }
 
     switchView(){
         this.documentsTab = !this.documentsTab
+    }
+
+    deleteDocument(documentId: any) {
+        console.log("Deleting document", documentId)
+        this.openWarningDialog()
+    }
+
+    closeDocument(){
+        this.visualizeDocument = !this.visualizeDocument
+    }
+
+    openWarningDialog(): void {
+        console.log("OPENING DOCUMENT DELETION DIALOG")
+        const dialogRef = this.dialog.open(WarningDialogComponentComponent, {
+            width: '400px',
+            data: { threadID: "", deletionFileName: "Document", documentID: this.selectedDocument.document_id}
+        });
+        dialogRef.componentInstance.deleteDocumentEmitter.subscribe((shouldDelete: boolean) => {
+            console.log("SHOULD DELETE", shouldDelete)
+            if (shouldDelete) {
+                this.graphService.deleteDocument(this.myUser.user_id, this.selectedDocument.document_id).subscribe()
+            }
+            this.getUserDocuments()
+            this.getUserGraphs()
+            this.closeDocument()
+        });
     }
 
     getGraphById(graphId: any) {
@@ -101,6 +145,7 @@ export class GraphGalleryComponentComponent implements OnInit {
             this.mostUsedNode =  mostUsedNodeResult['head'] + " and " + mostUsedNodeResult['tail']
         }
     }
+
 
     getMostUsedNodes(selectedGraph: kg | undefined){
         if (selectedGraph !== undefined) {

@@ -1,6 +1,6 @@
 <app-nav-bar></app-nav-bar>
 <div class="wrapper">
-    <div class="button-container">
+    <div class="button-container" *ngIf="!visualizeDocument && !visualizeGraph">
         <button type="button"
                 class="button view-button"
                 (click)="switchView()">
@@ -32,8 +32,13 @@
     </div>
     <div *ngIf="visualizeGraph">
         <div class="main-container-graph">
-            <div class="graph-diagram-card">
-                <app-d3-graph (closeGraphEmitter)="closeGraph()" [graphId]="this.selectedGraphId"></app-d3-graph>
+            <div class="left-column">
+                <div class="left-upper-column-graph">
+                    <app-d3-graph (closeGraphEmitter)="closeGraph()" [graphId]="this.selectedGraphId"></app-d3-graph>
+                </div>
+                <div class="left-lower-column-graph">
+                    AOOOOo
+                </div>
             </div>
             <div class="graph-info-card">
                 <div class="row row-1">
@@ -53,6 +58,21 @@
         </div>
     </div>
     <div *ngIf="visualizeDocument">
-        <app-pdf-render [userDocument]="this.selectedDocument"></app-pdf-render>
+        <app-pdf-render class="pdf-visualization" [userDocument]="this.selectedDocument"></app-pdf-render>
+        <div class="pdf-buttons">
+            <button type="button"
+                    class="button delete-pdf-button"
+                    (click)="deleteDocument(this.selectedDocument.document_id)">
+                <i class="fa fa-trash"></i>
+                Delete
+            </button>
+            <button type="button"
+                    class="button close-pdf-button"
+                    (click)="closeDocument()">
+                <i class="fa fa-times"></i>
+                Close
+            </button>
+        </div>
     </div>
+
 </div>

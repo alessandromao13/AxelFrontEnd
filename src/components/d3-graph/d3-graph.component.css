@@ -5,25 +5,23 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: auto;
-  background-color: #181818;
+  height: 100vh;
+  background-color: #262626;
 }
 
-
 .graph-container-card {
-  background-color: #181818;
+  flex: 1;
+  background-color: #262626;
   border-radius: 15px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   border: 1px solid #607d8b;
-  width: 100%;
-  height: auto;
+  width: 100%; /* Full width of the parent */
+  /*height: 100%; !* Full height of the parent *!*/
   max-width: 100%;
-  max-height: 100%;
+  /*max-height: 100%; !* Uncomment if needed *!*/
   overflow: hidden;
   position: relative;
-  margin-top: 2%;
 }
-
 
 .top-bar {
   display: flex;
@@ -39,7 +37,6 @@ body {
   left: 0;
   z-index: 10;
 }
-
 
 .control-button {
   background: none;
@@ -72,13 +69,12 @@ svg text {
   fill: white;
 }
 
-
 .control-button:hover {
   color: #607d8b;
 }
 
 @media (max-width: 768px) {
   .graph-container-card {
-    width: 95%;
+    width: 95%; /* Adjust for smaller screens */
   }
 }

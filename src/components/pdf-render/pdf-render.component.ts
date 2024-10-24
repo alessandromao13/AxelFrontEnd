@@ -1,49 +1,10 @@
-// import {Component, Input, OnInit} from '@angular/core';
-// import {UserDocument} from "../../modules/Document";
-// import {NgIf} from "@angular/common";
-// import {DomSanitizer, SafeResourceUrl} from "@angular/platform-browser";
-//
-// @Component({
-//   selector: 'app-pdf-render',
-//   standalone: true,
-//   imports: [
-//     NgIf
-//   ],
-//   templateUrl: './pdf-render.component.html',
-//   styleUrl: './pdf-render.component.css'
-// })
-// export class PdfRenderComponent implements OnInit {
-//
-//   @Input() userDocument!: UserDocument;
-//   pdfUrl: SafeResourceUrl | null = null;
-//
-//   // Inject DomSanitizer
-//   constructor(private sanitizer: DomSanitizer) {}
-//
-//   ngOnInit() {
-//     console.log("INIT", this.userDocument)
-//   }
-//
-//   ngOnChanges() {
-//     if (this.userDocument && this.userDocument.document) {
-//       const pdfBlob = new Blob([this.userDocument.document], { type: 'application/pdf' });
-//       const unsafeUrl = URL.createObjectURL(pdfBlob);
-//
-//       this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(unsafeUrl);
-//     }
-//   }
-//
-//   ngOnDestroy() {
-//     if (this.pdfUrl) {
-//       URL.revokeObjectURL(this.pdfUrl as string);
-//     }
-//   }
-//
-// }
 import { Component, Input, OnInit, OnChanges, SimpleChanges } from '@angular/core';
 import { UserDocument } from "../../modules/Document";
 import { NgIf } from "@angular/common";
 import { DomSanitizer, SafeResourceUrl } from "@angular/platform-browser";
+import {WarningDialogComponentComponent} from "../warning-dialog-component/warning-dialog-component.component";
+import {GraphService} from "../../services/graph.service";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-pdf-render',
@@ -73,7 +34,9 @@ export class PdfRenderComponent implements OnInit, OnChanges {
     if (this.userDocument?.document) {
       const pdfBlob = new Blob([this.userDocument.document], { type: 'application/pdf' });
       const unsafeUrl = URL.createObjectURL(pdfBlob);
+      console.log("UNSAFE URL:", unsafeUrl);
       this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(unsafeUrl);
+      console.log("PDFURL", this.pdfUrl)
     }
   }
 

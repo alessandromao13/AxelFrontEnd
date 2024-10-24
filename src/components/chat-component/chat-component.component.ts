@@ -1,5 +1,5 @@
-import {AfterViewChecked, Component, ElementRef, OnInit, Renderer2, ViewChild} from '@angular/core';
-import {Location, NgClass, NgForOf, NgIf} from "@angular/common";
+import {AfterViewChecked, Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {NgClass, NgForOf, NgIf} from "@angular/common";
 import {GraphService} from "../../services/graph.service";
 import {GraphEdge, GraphNode, kg} from "../../modules/Graph";
 import {SearchBarComponent} from "../search-bar/search-bar.component";
@@ -10,9 +10,11 @@ import {FormsModule} from "@angular/forms";
 import {Message} from "../../modules/Messages";
 import {NavBarComponent} from "../nav-bar/nav-bar.component";
 import {Thread} from "../../modules/Thread";
-import {GraphCreatedDialogComponent} from "../graph-created-dialog/graph-created-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {WarningDialogComponentComponent} from "../warning-dialog-component/warning-dialog-component.component";
+import {UserDocument} from "../../modules/Document";
+import {PdfRenderComponent} from "../pdf-render/pdf-render.component";
+import {PdfResponse} from "../../modules/PdfResponse";
 
 @Component({
     selector: 'app-chat-component',
@@ -25,7 +27,8 @@ import {WarningDialogComponentComponent} from "../warning-dialog-component/warni
         D3GraphComponent,
         FormsModule,
         NgClass,
-        NavBarComponent
+        NavBarComponent,
+        PdfRenderComponent
     ],
     templateUrl: './chat-component.component.html',
     styleUrl: './chat-component.component.css'
@@ -43,64 +46,78 @@ export class ChatComponentComponent implements OnInit, AfterViewChecked {
     visitedNodes: GraphNode[] = []
     visitedEdges: GraphEdge[] = []
     gotUserGraphs: kg[] = []
-    messages: Message[] = []
+    gotUserDocuments: UserDocument[] = []
     threadMessages: Message[] = []
     gotUserThreads: Thread[] = []
     visualizeGraph = false
+    visualizeDocument = false
+    selectedDocument: UserDocument = new UserDocument()
     selectedGraphId: string = ""
     selectedGraph: kg | undefined = undefined
     selectedThread: Thread | undefined = undefined
     thread_id: string = ""
     disableInput: boolean  = false
     @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
-
-    // ViewChild to reference the message-list container
     @ViewChild('messageListContainer') messageListContainer!: ElementRef;
-
 
     constructor(private graphService: GraphService, private dialog: MatDialog) {
     }
 
     ngOnInit() {
-        console.log("ON INIT GETTING GRAPHS")
-
         this.graphService.getGraphsByUserId(this.myUser.user_id).subscribe((data) => {
             this.gotUserGraphs = data
-            console.log("got graphs", data)
         });
-        console.log("ON INIT GETTING THREADS")
+        this.graphService.getUserDocumentsByUseId(this.myUser.user_id).subscribe((data) => {
+            this.gotUserDocuments = data
+        });
         this.getUserThreads()
     }
 
     getUserThreads() {
         this.graphService.getThreadsByUserId(this.myUser.user_id).subscribe((data) => {
             this.gotUserThreads = data
-            console.log("got threads", data)
         });
-
     }
 
     openUserGraph(graph_id: string) {
         this.visualizeGraph = true
         this.selectedGraphId = graph_id
         this.selectedGraph = this.gotUserGraphs.find(g => g.graph_id === graph_id)
-        console.log("VISUALIZE GRAPH", graph_id)
+    }
+
+    openUserDocument(document: UserDocument) {
+        // todo
+        this.selectedDocument = new UserDocument();
+        this.selectedDocument.title = document.title;
+        this.selectedDocument.rag_id = document.rag_id;
+        this.selectedDocument.document_id = document.document_id;
+        this.getUserPDF(document.document_id)
+    }
+
+
+    getUserPDF(document_id: any) {
+        this.graphService.getUserPDF(this.myUser.user_id, document_id).subscribe((response: PdfResponse) => {
+            this.selectedDocument.document = response.got_pdf;
+            this.visualizeDocument = true;
+        });
     }
 
     closeGraph() {
         this.visualizeGraph = false
     }
 
+    closeDocument() {
+        this.visualizeDocument = false
+    }
+
 
     showUserMessages(event: any) {
-        console.log("GOT THREAD ID", event)
         this.selectedThread = this.gotUserThreads.find(t => t.thread_id === event)
         this.thread_id = event.thread_id
         for (let i = 0; i < this.gotUserThreads.length; i++) {
             const thread = this.gotUserThreads[i];
             if (thread.thread_id == event) {
                 this.threadMessages = thread.messages;
-                console.log("GOT THREAD MESSAGES", this.threadMessages)
             }
         }
     }
@@ -133,22 +150,16 @@ export class ChatComponentComponent implements OnInit, AfterViewChecked {
         console.log("+++ USED EDGES", visitedEdges)
     }
 
+
     sendMessage() {
-        this.disableInput = true
         if (this.inputField.length > 0) {
             console.log("SENDING MESSAGE VALUES",
                 "GRAPH ID", this.usedGraphId,
                 "USER MESSAGE", this.userMessage.content = this.inputField,
             )
             this.pushMessage(new Message("USER", this.userMessage.content))
-            console.log("Selected GRaph id", this.selectedGraphId)
             this.inputField = ""
-            console.log("sending message", this.thread_id, this.selectedThread?.usedGraphId)
-            console.log("USER MESSAGE", this.userMessage.content)
-            // this.pushMessage(new Message("USER", this.userMessage.content))
-            // todo decommentare per chattare effettivamente
-            this.graphService.executeChatSystem(this.userMessage.content, this.selectedGraphId, "1234", this.selectedThread?.thread_id).subscribe((data) => {
-                console.log("++++ CHAT +++ GOT RESPONSE:", data)
+            this.graphService.executeChatSystem(this.userMessage.content, this.selectedGraphId, this.selectedDocument.rag_id, "1234", this.selectedThread?.thread_id).subscribe((data) => {
                 if (this.selectedThread == undefined) {
                     this.selectedThread = new Thread()
                     this.selectedThread.thread_id = data.thread_id
@@ -160,17 +171,17 @@ export class ChatComponentComponent implements OnInit, AfterViewChecked {
                 this.pushMessage(new Message("BOT", this.llmRes.content))
                 this.showContext(this.gotContext)
                 this.updateGraphView(this.visitedNodes, this.visitedEdges)
-                console.log("THREAD ID FROM DATA", data.thread_id)
-                console.log("THREAD ID", this.selectedThread.thread_id)
                 this.disableInput = false
             });
         }
     }
 
-
     changeTab() {
         this.showThreadsList = !this.showThreadsList
         this.selectedThread = undefined
+        this.visualizeDocument = false
+        this.visualizeGraph = false
+        this.newThread()
         this.getUserThreads()
     }
 
@@ -178,14 +189,13 @@ export class ChatComponentComponent implements OnInit, AfterViewChecked {
         this.threadMessages = []
         this.inputField = ""
         this.selectedGraphId = ""
+        this.selectedDocument = new UserDocument()
         this.selectedGraph = undefined
         this.graphService.getNewThreadID().subscribe((data) => {
             this.thread_id = data
-            console.log("got threads", data)
         });
         this.selectedThread = new Thread()
         this.selectedThread.thread_id = this.thread_id;
-        console.log("NEW THREAD WITH ID", this.thread_id)
     }
 
     deleteThread() {
@@ -195,20 +205,18 @@ export class ChatComponentComponent implements OnInit, AfterViewChecked {
     openWarningDialog(): void {
         const dialogRef = this.dialog.open(WarningDialogComponentComponent, {
             width: '400px',
-            data: { threadID: this.selectedThread?.thread_id }
+            data: { threadID: this.selectedThread?.thread_id, deletionFileName: "Thread", documentID: ""}
         });
         dialogRef.componentInstance.deleteThreadEmitter.subscribe((shouldDelete: boolean) => {
-            console.log("PARENT GOT EMISSION", shouldDelete)
             if (shouldDelete) {
-                console.log("Thread deletion confirmed.", this.thread_id);
                 if (this.selectedThread) {
                     this.graphService.deleteChat(this.selectedThread.thread_id).subscribe()
                 } else {
                     this.graphService.deleteChat(this.thread_id).subscribe()
                 }
                 this.changeTab()
+                this.getUserThreads()
             }
-
         });
     }
 }
