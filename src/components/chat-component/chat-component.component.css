@@ -2,7 +2,6 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    /*overflow: hidden;*/
 }
 
 * {
@@ -19,6 +18,8 @@ html, body {
     overflow: hidden;
     background-color: #181818;
 }
+
+
 
 .left-container {
     position: relative;
@@ -39,17 +40,16 @@ html, body {
 .message-list {
     overflow: auto;
     max-height: 600px;
-    /*margin-bottom: 600px;*/
 }
 
 .thread-box {
     height: 60%;
     width: 100%;
-    background-color: #212121; /* Default green background */
-    box-shadow: 0 8px #151515; /* 3D button effect */
+    background-color: #212121;
+    box-shadow: 0 8px #151515;
     margin-bottom: 5%;
     margin-top: 5%;
-    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
     display: inline-flex;
     align-items: center;
@@ -57,8 +57,8 @@ html, body {
     text-align: center;
     text-decoration: none;
     color: #ffffff;
-    border: 4px solid #212121; /* Darker pixel border */
-    border-radius: 10px; /* Pixel style rounded corners */
+    border: 4px solid #212121;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
@@ -85,7 +85,7 @@ html, body {
     background-color: #1e1c1c;
     border-radius: 10px;
     padding: 2%;
-    width: 100%;
+    width: 50%;
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -93,23 +93,23 @@ html, body {
 
 .message-box,
 .message-box-reversed {
-    background-color: #11496b; /* or #0d9b05 for reversed */
+    background-color: #11496b;
     padding: 10px;
     border-radius: 5px;
     max-width: 60%;
     color: white;
-    word-wrap: break-word; /* Ensures long words break */
-    overflow-wrap: break-word; /* Prevents text from overflowing */
-    white-space: normal; /* Allows text to wrap to the next line */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
 }
 
 .message-box-reversed {
-    background-color: #0d9b05; /* Different color for reversed */
+    background-color: #0d9b05;
 }
 
 .top-button {
     margin-bottom: 1%;
-    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    font-family: 'Press Start 2P', cursive;
     padding: 12px 24px;
     font-size: 0.8rem;
     display: inline-flex;
@@ -118,17 +118,16 @@ html, body {
     text-align: center;
     text-decoration: none;
     color: #ffffff;
-    border: 4px solid #212121; /* Darker pixel border */
-    border-radius: 10px; /* Pixel style rounded corners */
+    border: 4px solid #212121;
+    border-radius: 10px;
     cursor: pointer;
     transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
 }
 
 .back-button {
-    /*background-color: #b7b702; !* Default green background *!*/
-    background-color: #212121; /* Default green background */
-    box-shadow: 0 8px #151515; /* 3D button effect */
-    /*box-shadow: 0 8px #7e7e07; !* 3D button effect *!*/
+    background-color: #212121;
+    box-shadow: 0 8px #151515;
+
 }
 
 .threads-title-card {
@@ -140,13 +139,13 @@ html, body {
 }
 
 .new-chat-button {
-    background-color: #212121; /* Default green background */
-    box-shadow: 0 8px #151515; /* 3D button effect */
+    background-color: #212121;
+    box-shadow: 0 8px #151515;
 }
 
 .delete-thread-button {
-    background-color: #212121; /* Default green background */
-    box-shadow: 0 8px #151515; /* 3D button effect */
+    background-color: #212121;
+    box-shadow: 0 8px #151515;
 }
 
 .delete-thread-button:hover {
@@ -166,12 +165,11 @@ html, body {
 }
 
 
-/* Pixelated icon style */
 .pixel-icon {
-    font-size: 20px; /* Adjust icon size */
+    font-size: 20px;
     margin-right: 8px;
-    image-rendering: pixelated; /* Forces pixel rendering */
-    color: #ffffff; /* Icon color */
+    image-rendering: pixelated;
+    color: #ffffff;
 }
 
 
@@ -187,21 +185,6 @@ html, body {
     z-index: 10;
 }
 
-
-.right-container {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: #212121;
-    border-radius: 20px;
-    padding: 1%;
-    margin: 10px;
-    min-width: 200px;
-    height: 100%;
-    overflow: hidden;
-    animation: fadeIn 1.5s ease-in-out forwards;
-}
 
 .icon-spacing {
     margin-right: 3%;
@@ -240,9 +223,9 @@ html, body {
 }
 
 .send-button {
-    background-color: #171616; /* Dark background for send button */
-    color: #9D0808; /* Red color for text/icon */
-    box-shadow: 0 8px #1a1e1f; /* 3D button effect */
+    background-color: #171616;
+    color: #9D0808;
+    box-shadow: 0 8px #1a1e1f;
     font-family: 'Press Start 2P', cursive;
     padding: 12px 24px;
     font-size: 0.8rem;
@@ -259,13 +242,13 @@ html, body {
 
 .send-button:active {
     transform: translateY(2px);
-    box-shadow: 0 4px #1a1e1f; /* Reduce shadow for pressed effect */
+    box-shadow: 0 4px #1a1e1f;
 }
 
 
 .loading-icon {
-    background-color: #171616; /* Consistent with send button */
-    color: #9D0808; /* Red color for spinner icon */
+    background-color: #171616;
+    color: #9D0808;
     animation: spin 1s linear infinite;
 }
 
@@ -273,34 +256,21 @@ html, body {
 .input-field {
     background-color: #262525;
     width: 70%;
-    border: 1px solid transparent; /* Transparent border for a sleek look */
+    border: 1px solid transparent;
     padding: 10px;
-    border-radius: 5px; /* Add border-radius for rounded corners */
-    transition: box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth transition */
-    color: #ffffff; /* White text color */
-    font-family: 'Poppins', sans-serif; /* Modern font choice */
-    font-size: 16px; /* Font size */
+    border-radius: 5px;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
+    color: #ffffff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
 }
 
 .input-field:focus {
-    border-color: #04AA6D; /* Same highlighted border on focus */
-    box-shadow: 0 0 10px rgba(4, 170, 109, 0.5); /* Same soft green glow on focus */
-    outline: none; /* Remove default outline */
+    border-color: #04AA6D;
+    box-shadow: 0 0 10px rgba(4, 170, 109, 0.5);
+    outline: none;
 }
 
-.upper-box {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: #292929;
-    border-radius: 10px;
-    height: 50%;
-    width: 100%;
-    overflow: hidden;
-    margin-top: 0;
-}
 
 .row-title {
     font-family: 'Press Start 2P', cursive;
@@ -310,22 +280,17 @@ html, body {
     width: 100%;
 }
 
-
-.lower-box {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: stretch;
-    margin: 5px;
-    padding: 10px;
-    box-sizing: border-box;
-    background-color: #292929;
-    border-radius: 10px;
-    resize: vertical;
-    overflow: auto;
-    /*max-height: calc(50% - 10px);*/
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
+
 
 
 .graph-card-test {
@@ -344,16 +309,52 @@ html, body {
     box-shadow: 0 8px #151515;
     font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
-    text-align: center; /* Center the text */
+    text-align: center;
 }
 
 
+.right-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #212121;
+    border-radius: 20px;
+    padding: 1%;
+    margin: 10px;
+    min-width: 200px;
+    height: 100%;
+    overflow: hidden;
+    animation: fadeIn 1.5s ease-in-out forwards;
+}
+
+.upper-box, .lower-box {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: #292929;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.upper-box {
+    min-height: 0;
+}
+
+.lower-box {
+    min-height: 0;
+    overflow-y: auto;
+}
+
 .graph-info-card-title {
-    height: 50px; /* Set a smaller, fixed height for the title card */
-    overflow-y: hidden; /* Disable scrolling for the title */
+    height: 50px;
+    overflow: hidden;
     word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: normal; /* Allow text to wrap */
+    white-space: normal;
     width: 100%;
     padding: 10%;
     margin-bottom: 10px;
@@ -362,15 +363,15 @@ html, body {
     box-sizing: border-box;
     display: flex;
     justify-content: center;
-    align-items: center; /* Center-align the title content */
-    background-color: #212121; /* Default green background */
-    box-shadow: 0 8px #151515; /* 3D button effect */
-    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    align-items: center;
+    background-color: #212121;
+    box-shadow: 0 8px #151515;
+    font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
 }
 
 .graph-info-card-content {
-    flex-grow: 1; /* Allow the content card to take up all remaining space */
+    flex-grow: 1;
     padding: 10%;
     margin-bottom: 10px;
     border-radius: 10px;
@@ -378,72 +379,37 @@ html, body {
     box-sizing: border-box;
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* Align content to the top */
-    max-height: 100%; /* Allow the content to take all remaining height */
-    overflow-y: auto; /* Enable vertical scrolling for content */
+    align-items: flex-start;
+    max-height: 100%;
+    overflow-y: auto;
     word-wrap: break-word;
-    overflow-wrap: break-word; /* Break long words if necessary */
-    white-space: normal; /* Allow text to wrap */
-    background-color: #212121; /* Default green background */
-    box-shadow: 0 8px #151515; /* 3D button effect */
-    font-family: 'Press Start 2P', cursive; /* Pixel font */
+    white-space: normal;
+    background-color: #212121;
+    box-shadow: 0 8px #151515;
+    font-family: 'Press Start 2P', cursive;
     font-size: 0.8rem;
 }
 
-.right-container {
-    resize: none;
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.left-container, .upper-box, .lower-box {
-    animation: fadeIn 1.5s ease-in-out forwards;
-    opacity: 0;
-}
-
-.left-container {
-    animation-delay: 0.2s;
-}
-
-.upper-box {
-    animation-delay: 0.4s;
-}
-
-.lower-box {
-    animation-delay: 0.6s;
-}
-
-.upper-box, .lower-box {
-    flex-grow: 1;
-    /*resize: vertical;*/
-    /*overflow: auto;*/
-    /*max-height: 50%;*/
-}
-
-.lower-box-full {
-    flex-grow: 1;
-    resize: vertical;
-    overflow: auto;
-    max-height: 100%;
+.graph-container-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #262626;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    border: 1px solid #607d8b;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
 }
 
 
 .pdf-visualization {
     width: 100%;
     height: 100%;
-}
-
-.lower-box {
-    margin-top: 10px;
 }
 
 

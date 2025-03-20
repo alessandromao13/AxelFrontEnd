@@ -20,7 +20,6 @@ export class NavBarComponent {
   }
 
   openChat() {
-    console.log("NAVIGATING TO CHAT")
     this.router.navigate(['/chat']);
   }
 

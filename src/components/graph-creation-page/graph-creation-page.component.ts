@@ -48,7 +48,7 @@ export class GraphCreationPageComponent implements OnInit {
         this.aiGeneration = enable
         this.titleTextInput = ""
         this.summaryTextInput = ""
-        console.log("++ AI GENERATION IS ENABLED: ", this.aiGeneration)
+        // console.log("++ AI GENERATION IS ENABLED: ", this.aiGeneration)
     }
 
     checkCanGenerate() {
@@ -67,12 +67,12 @@ export class GraphCreationPageComponent implements OnInit {
     }
 
     updateUploadedFile(event: any) {
-        console.log("PARENT GOT FILE", event)
+        // console.log("PARENT GOT FILE", event)
         this.uploadedFile = event
     }
 
     generateGraph() {
-        console.log("GENERATING GRAPH")
+        // console.log("GENERATING GRAPH")
         this.loading = true
         if (this.aiGeneration) {
             this.summaryTextInput = ""

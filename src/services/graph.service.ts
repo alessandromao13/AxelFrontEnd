@@ -64,7 +64,6 @@ export class GraphService {
             topic: topic,
             summary: summary
         };
-        // fixme: fix this everywhere
         const user_id_cast = Number(userId);
         return this.http.post<{ userGraphs: any[] }>(`${this.baseUrl}/generate-graph/${user_id_cast}`, body);
     }
@@ -88,7 +87,7 @@ export class GraphService {
     }
 
     getUserDocumentsByUseId(user_id: string) {
-        console.log("GETTING USER DOCS BY ID", user_id)
+        // console.log("GETTING USER DOCS BY ID", user_id)
         return this.http
             .get(`${this.baseUrl}/user-rags/${user_id}`)
             .pipe(map(value => value as UserDocument[]));
@@ -107,7 +106,7 @@ export class GraphService {
     }
 
     deleteDocument(user_id: string, document_id: string) {
-        console.log("DELETING DOCUMENT: ", document_id)
+        // console.log("DELETING DOCUMENT: ", document_id)
         return this.http
             .get(`${this.baseUrl}/delete-user-document/${user_id}/${document_id}`)
             .pipe(map(value => value as string));

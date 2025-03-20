@@ -20,7 +20,7 @@ export class PdfRenderComponent implements OnInit, OnChanges {
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit() {
-    console.log("INIT", this.userDocument);
+    // console.log("INIT", this.userDocument);
     this.createPdfUrl();
   }
 
@@ -34,9 +34,9 @@ export class PdfRenderComponent implements OnInit, OnChanges {
     if (this.userDocument?.document) {
       const pdfBlob = new Blob([this.userDocument.document], { type: 'application/pdf' });
       const unsafeUrl = URL.createObjectURL(pdfBlob);
-      console.log("UNSAFE URL:", unsafeUrl);
+      // console.log("UNSAFE URL:", unsafeUrl);
       this.pdfUrl = this.sanitizer.bypassSecurityTrustResourceUrl(unsafeUrl);
-      console.log("PDFURL", this.pdfUrl)
+      // console.log("PDFURL", this.pdfUrl)
     }
   }
 

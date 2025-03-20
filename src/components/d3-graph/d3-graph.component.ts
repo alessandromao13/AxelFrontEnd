@@ -45,12 +45,12 @@ export class D3GraphComponent implements OnInit {
   @Output() closeGraphEmitter= new EventEmitter<boolean>
 
   ngOnInit(): void {
-    console.log("+++ OOO HO RICEVUTO ID", this.graphId)
+    // console.log("+++ OOO HO RICEVUTO ID", this.graphId)
     window.addEventListener('mousemove', this.onMouseMove.bind(this));
     window.addEventListener('mouseup', this.onMouseUp.bind(this));
     this.viewBox = `0 0 ${this.width} ${this.height}`;
     if (this.graphId !== undefined) {
-      console.log("CREO")
+      // console.log("CREO")
       this.generateGraph(this.graphId)
     }
   }
@@ -137,7 +137,7 @@ export class D3GraphComponent implements OnInit {
       });
     });
 
-    console.log("FATTO GRAFOOOO")
+    // console.log("FATTO GRAFOOOO")
   }
 
 
@@ -199,7 +199,7 @@ export class D3GraphComponent implements OnInit {
   }
 
   closeGraph() {
-    console.log("CHIUDOOOO")
+    // console.log("CHIUDOOOO")
     this.closeGraphEmitter.emit(true)
   }
 

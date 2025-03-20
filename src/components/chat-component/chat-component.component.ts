@@ -57,7 +57,7 @@ export class ChatComponentComponent implements OnInit, AfterViewChecked {
     selectedThread: Thread | undefined = undefined
     thread_id: string = ""
     disableInput: boolean  = false
-    @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
+    // @ViewChild('scrollContainer') private scrollContainer!: ElementRef;
     @ViewChild('messageListContainer') messageListContainer!: ElementRef;
 
     constructor(private graphService: GraphService, private dialog: MatDialog) {
@@ -131,7 +131,7 @@ export class ChatComponentComponent implements OnInit, AfterViewChecked {
             const container = this.messageListContainer.nativeElement;
             container.scrollTop = container.scrollHeight;
         } catch (err) {
-            console.error('Failed to scroll to the bottom', err);
+            // console.error('Failed to scroll to the bottom', err);
         }
     }
 
@@ -146,17 +146,17 @@ export class ChatComponentComponent implements OnInit, AfterViewChecked {
     }
 
     updateGraphView(visitedNodes: GraphNode[], visitedEdges: GraphEdge[]) {
-        console.log("+++ USED NODES", visitedNodes)
-        console.log("+++ USED EDGES", visitedEdges)
+        // console.log("+++ USED NODES", visitedNodes)
+        // console.log("+++ USED EDGES", visitedEdges)
     }
 
 
     sendMessage() {
         if (this.inputField.length > 0) {
-            console.log("SENDING MESSAGE VALUES",
-                "GRAPH ID", this.usedGraphId,
-                "USER MESSAGE", this.userMessage.content = this.inputField,
-            )
+            // console.log("SENDING MESSAGE VALUES",
+            //     "GRAPH ID", this.usedGraphId,
+            //     "USER MESSAGE", this.userMessage.content = this.inputField,
+            // )
             this.pushMessage(new Message("USER", this.userMessage.content))
             this.inputField = ""
             this.graphService.executeChatSystem(this.userMessage.content, this.selectedGraphId, this.selectedDocument.rag_id, "1234", this.selectedThread?.thread_id).subscribe((data) => {

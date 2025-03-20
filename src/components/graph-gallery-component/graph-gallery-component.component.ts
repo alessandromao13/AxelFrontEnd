@@ -55,7 +55,7 @@ export class GraphGalleryComponentComponent implements OnInit {
 
     getUserDocuments() {
         this.graphService.getUserDocumentsByUseId(this.myUser.user_id).subscribe((data) => {
-            console.log("GOT DOCUMENTS", data)
+            // console.log("GOT DOCUMENTS", data)
             this.gotUserDocuments = data
             this.loading = false
         });
@@ -64,7 +64,7 @@ export class GraphGalleryComponentComponent implements OnInit {
     getUserGraphs() {
         this.graphService.getGraphsByUserId(this.myUser.user_id).subscribe((data) => {
             this.gotUserGraphs = data
-            console.log("GOT GRAPHS", this.gotUserGraphs)
+            // console.log("GOT GRAPHS", this.gotUserGraphs)
             this.loading = false
         });
     }
@@ -82,7 +82,7 @@ export class GraphGalleryComponentComponent implements OnInit {
     }
 
     openGraph(graphId: string) {
-        console.log("GOT GRAPH TO OPEN", graphId)
+        // console.log("GOT GRAPH TO OPEN", graphId)
         this.visualizeGraph = true
         this.selectedGraphId = graphId
         this.getGraphById(graphId)
@@ -93,9 +93,9 @@ export class GraphGalleryComponentComponent implements OnInit {
         this.selectedDocument.title = document.title;
         this.selectedDocument.rag_id = document.rag_id;
         this.selectedDocument.document_id = document.document_id;
-        console.log("DOCUMENT ID", this.selectedDocument.document_id)
         this.getUserPDF(document.document_id)
-        console.log("OPENING PDF", this.selectedDocument);
+        // console.log("DOCUMENT ID", this.selectedDocument.document_id)
+        // console.log("OPENING PDF", this.selectedDocument);
     }
 
 
@@ -111,7 +111,7 @@ export class GraphGalleryComponentComponent implements OnInit {
     }
 
     deleteDocument(documentId: any) {
-        console.log("Deleting document", documentId)
+        // console.log("Deleting document", documentId)
         this.openWarningDialog()
     }
 
@@ -120,13 +120,13 @@ export class GraphGalleryComponentComponent implements OnInit {
     }
 
     openWarningDialog(): void {
-        console.log("OPENING DOCUMENT DELETION DIALOG")
+        // console.log("OPENING DOCUMENT DELETION DIALOG")
         const dialogRef = this.dialog.open(WarningDialogComponentComponent, {
             width: '400px',
             data: { threadID: "", deletionFileName: "Document", documentID: this.selectedDocument.document_id}
         });
         dialogRef.componentInstance.deleteDocumentEmitter.subscribe((shouldDelete: boolean) => {
-            console.log("SHOULD DELETE", shouldDelete)
+            // console.log("SHOULD DELETE", shouldDelete)
             if (shouldDelete) {
                 this.graphService.deleteDocument(this.myUser.user_id, this.selectedDocument.document_id).subscribe()
             }
@@ -150,7 +150,7 @@ export class GraphGalleryComponentComponent implements OnInit {
     getMostUsedNodes(selectedGraph: kg | undefined){
         if (selectedGraph !== undefined) {
             const result = this.getMaxUsageRelation(selectedGraph)
-            console.log(result)
+            // console.log(result)
             return result
         } else {
             return undefined

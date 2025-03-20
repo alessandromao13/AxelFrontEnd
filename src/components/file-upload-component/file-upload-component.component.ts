@@ -97,7 +97,7 @@ export class FileUploadComponentComponent {
             this.fileName = this.file.name
             const formData = new FormData()
             formData.append("file", this.file)
-            console.log("Selected PDF file:", this.file)
+            // console.log("Selected PDF file:", this.file)
             this.uploadedFileEmitter.emit(this.file)
             this.fileUploaded = true
         } else {
